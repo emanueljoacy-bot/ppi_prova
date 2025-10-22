@@ -1,36 +1,30 @@
 <?php
-
 require_once __DIR__ . '/../models/tarefa.php';
-
-class TarefaController{
-    private $tarefaModel;
+class TarefaController {
+    private $tarefaModel; 
 
     public function __construct(){
-        $this->tarefaModel = new Tarefa();
-    }
-    ##Listar
-    public function index (){
-        $tarefas = $this->tarefaModel->listar();
-     include __DIR__ .'/../views/listar.php' ;
-
+        $this->tarefaModel = new Tarefa(); 
     }
 
+    public function index(){
+        $tarefas = $this->tarefaModel->listar(); 
+        include __DIR__ . '/../views/listar.php'; 
+    }
 
-
-    ## Criar
-    public function criar () {
+    public function criar(){
         if(isset($_POST['descricao']) && !empty(trim($_POST['descricao']))){
-            $this->tarefaModel->criar($_POST('descricao'));
+            $this->tarefaModel->criar($_POST['descricao']); 
         }
-        header(header: "location: index.php");
+        header("Location: index.php"); 
     }
-   ## Excluir
-   public function excluir() {
-    if (isset($_GET['delete'])) {
-        $this->tarefaModel->excluir($_GET['delete']);
+
+    public function excluir(){
+        if(isset($_GET['delete'])){
+            $this->tarefaModel->excluir($_GET['delete']); 
+        }
+        header("Location: index.php"); 
     }
-    header('location: index.php');
 }
 
-}
 ?>
